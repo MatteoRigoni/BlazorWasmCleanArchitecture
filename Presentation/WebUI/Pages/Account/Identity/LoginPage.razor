@@ -1,0 +1,55 @@
+﻿@using Application.DTOs.Request.Account
+@using Application.Extensions
+@using Application.Services
+@using Microsoft.AspNetCore.Components.Authorization
+@inject NavigationManager NavigationManager
+@inject AuthenticationStateProvider AuthenticationStateProvider
+@inject IAccountService AccountService
+
+<h3>LoginPage (todo)</h3>
+
+@code {
+    [CascadingParameter]
+    public Task<AuthenticationState> ClientAuthState { get; set; }
+
+    public LoginDTO LoginModel { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        try
+        {
+            if ((await ClientAuthState).User.Identity.IsAuthenticated == true)
+                NavigationManager.NavigateTo("content/home", false, true);
+        }
+        catch (Exception)
+        {            
+        }
+    }
+
+    private async Task LoginAsync()
+    {
+        try
+        {
+            var response = await AccountService.LoginAccountAsync(LoginModel);
+            if (response.Flag)
+            {
+                var customAuthStateProvider = (CustomAuthenticationStateProvider)AuthenticationStateProvider;
+                await customAuthStateProvider.UpdateAuthenticationState(new LocalStorageDTO()
+                    {
+                        Token = response.Token,
+                        Refresh = response.RefreshTOken
+                    });
+
+                NavigationManager.NavigateTo("content/home", false, true);
+            }
+            else
+            {
+                // todo, show modal with error
+            }
+        }
+        catch (Exception)
+        {
+            
+        }
+    }
+}
