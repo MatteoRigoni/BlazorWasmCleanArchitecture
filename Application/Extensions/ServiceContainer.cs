@@ -17,6 +17,7 @@ namespace Application.Extensions
         public static IServiceCollection AddApplicationService(this IServiceCollection services)
         {
             services.AddScoped<IAccountService, AccountService>();
+            services.AddScoped<IAnagraficaService, AnagraficaService>();
             services.AddAuthorizationCore();
             services.AddNetcodeHubLocalStorageService();
             services.AddScoped<Extensions.LocalStorageService>();

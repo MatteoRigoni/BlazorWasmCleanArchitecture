@@ -23,6 +23,10 @@ namespace Application.Utils
         public const string GetUserWithRolesRoute = "api/account/identity/users-with-roles";
         public const string ChangeUserRoleRoute = "api/account/identity/change-role";
 
+        public const string CustomerRoute = "api/anagrafica";
+        public const string CreateCustomerRoute = "api/anagrafica";
+        public const string ExportCustomerRoute = "api/anagrafica/export";
+
         public static class Role
         {
             public const string Admin = "Admin";
