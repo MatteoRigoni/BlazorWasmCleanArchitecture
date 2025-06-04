@@ -59,6 +59,7 @@ namespace Infrastructure.Extensions
             });
 
             services.AddScoped<IAccount, AccountRepository>();
+            services.AddScoped<IAnagrafica, AnagraficaRepository>();
 
             return services;
         }

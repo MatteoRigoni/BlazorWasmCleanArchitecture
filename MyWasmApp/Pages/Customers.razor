@@ -1,0 +1,38 @@
+@page "/customers"
+@inject IAnagraficaService service
+
+<h3>Customers</h3>
+
+<button @onclick="Load">Load</button>
+<button @onclick="Export">Export</button>
+
+@if(customers is null)
+{
+    <p>Loading...</p>
+}
+else
+{
+    <table>
+        <thead><tr><th>Id</th><th>Name</th><th>Email</th></tr></thead>
+        <tbody>
+        @foreach(var c in customers)
+        {
+            <tr><td>@c.Id</td><td>@c.FirstName @c.LastName</td><td>@c.Email</td></tr>
+        }
+        </tbody>
+    </table>
+}
+
+@code {
+    IEnumerable<CustomerDTO>? customers;
+
+    async Task Load()
+    {
+        customers = await service.GetAsync();
+    }
+
+    async Task Export()
+    {
+        await service.ExportAsync();
+    }
+}

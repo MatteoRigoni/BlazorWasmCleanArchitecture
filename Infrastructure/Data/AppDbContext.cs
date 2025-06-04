@@ -1,6 +1,7 @@
 ﻿using Domain.Entities.Authentication;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using Domain.Entities.Anagrafica;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,5 +16,6 @@ namespace Infrastructure.Data
         {
         }
         public DbSet<RefreshToken> RefreshTokens { get; set; }
+        public DbSet<Customer> Customers { get; set; }
     }
 }
